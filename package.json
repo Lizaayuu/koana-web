@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "push": "prisma db push",
-    "generate": "prisma generate"
+    "generate": "prisma generate",
+    "build": "prisma generate && next build"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
