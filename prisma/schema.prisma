@@ -1,0 +1,60 @@
+// Ini adalah pengaturan dasar penghubung database
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql" // Kita pakai PostgreSQL dari Neon
+  url      = env("DATABASE_URL")
+}
+
+// =========================================
+// 1. TABEL LEMBAR REFLEKSI
+// =========================================
+model Refleksi {
+  id        Int      @id @default(autoincrement())
+  nama      String
+  kelas     String
+  tanggal   String
+  situasi   String   @db.Text
+  cemas     String   @db.Text
+  aksi      String   @db.Text
+  cara      String?  @db.Text // Tanda tanya (?) berarti opsional/boleh kosong
+  support   String
+  pesan     String   @db.Text
+  createdAt DateTime @default(now()) // Mencatat waktu otomatis saat data masuk
+}
+
+// =========================================
+// 2. TABEL HASIL LKPD
+// =========================================
+model Lkpd {
+  id          Int      @id @default(autoincrement())
+  nama        String
+  kelas       String
+  tanggal     String
+  a_perasaan  String?  @db.Text
+  a_pikiran   String?  @db.Text
+  a_tindakan1 String?  @db.Text
+  a_tindakan2 String?  @db.Text
+  situasi     String   @db.Text
+  cemas       String   @db.Text
+  seimbang    String   @db.Text
+  langkah     String   @db.Text
+  support     String
+  createdAt   DateTime @default(now())
+}
+
+// =========================================
+// 3. TABEL EVALUASI TANTANGAN 3 HARI
+// =========================================
+model Tantangan {
+  id             Int      @id @default(autoincrement())
+  nama           String
+  kelas          String
+  tanggalSelesai String
+  kebiasaan      String   @db.Text
+  evaluasi       String   @db.Text
+  pesan          String   @db.Text
+  createdAt      DateTime @default(now())
+}

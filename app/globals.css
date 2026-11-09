@@ -24,3 +24,19 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* --- TAMBAHKAN KODE INI DI PALING BAWAH globals.css --- */
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 1.5cm !important;
+    /* Ini yang akan mencegah teks mepet di halaman 2, 3, dst */
+  }
+
+  /* Menyembunyikan header/footer URL dan Tanggal bawaan browser */
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
