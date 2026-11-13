@@ -81,7 +81,7 @@ export default function Tantangan() {
         setDays(newDays);
     };
 
-    // --- FUNGSI PENGIRIM KE DATABASE ---
+// --- FUNGSI PENGIRIM KE DATABASE ---
     const handleSubmitEvaluasi = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
@@ -99,22 +99,38 @@ export default function Tantangan() {
                         kelas,
                         tanggalSelesai: getLocalDateStr(),
                         kebiasaan: kebiasaanFinal,
+                        catatanH1: days[0].note,
+                        catatanH2: days[1].note,
+                        catatanH3: days[2].note,
                         evaluasi,
                         pesan
                     }
                 }),
             });
 
+            // 👇 BAGIAN RESETNYA MASUK KE SINI 👇
             if (res.ok) {
                 setIsSuccess(true);
-                // Kosongkan form identitas & evaluasi (Tracker hari tidak dikosongkan agar bukti 3 hari tidak hilang)
+                
+                // 1. Kosongkan form identitas & evaluasi
                 setNama(''); setKelas(''); setEvaluasi(''); setPesan('');
+                
+                // 2. RESET TOTAL TANTANGAN (Hapus dari local storage & kosongkan state)
+                localStorage.removeItem('koana_tantangan_v3');
+                setSelectedHabit('');
+                setCustomHabit('');
+                setDays([
+                    { dateCompleted: '', note: '' },
+                    { dateCompleted: '', note: '' },
+                    { dateCompleted: '', note: '' }
+                ]);
+
                 setTimeout(() => setIsSuccess(false), 5000);
             } else {
                 alert("Gagal mengirim Evaluasi Tantangan. Coba lagi ya!");
             }
         } catch (error) {
-            console.error("Error submitting:", error);
+            console.error(error);
             alert("Terjadi kesalahan jaringan.");
         } finally {
             setIsSubmitting(false);
@@ -131,8 +147,9 @@ export default function Tantangan() {
 
             {/* POP-UP MELAYANG (Toast Notification) - Selalu terlihat di posisi manapun! */}
             {isSuccess && (
-                <div className="fixed top-24 left-1/2 -translate-x-1/2 bg-orange-100 text-orange-800 px-6 py-3 rounded-full font-bold shadow-lg z-50 flex items-center gap-3 animate-in slide-in-from-top-10 fade-in duration-300">
-                    <span className="text-xl">🔥</span> Evaluasi Tantangan 3 Hari berhasil dikirim!
+                <div className="fixed top-6 md:top-24 left-1/2 -translate-x-1/2 w-[90%] md:w-auto bg-orange-100 text-orange-800 px-6 py-4 md:py-3 rounded-2xl md:rounded-full font-bold shadow-lg z-[100] flex items-center justify-center gap-3 animate-in slide-in-from-top-10 fade-in duration-300 border border-orange-200 text-center whitespace-nowrap md:whitespace-normal text-sm md:text-base">
+                    <span className="text-xl shrink-0">🔥</span>
+                    <span className="truncate">Tantangan 3 Hari berhasil dikirim!</span>
                 </div>
             )}
 
@@ -159,17 +176,52 @@ export default function Tantangan() {
 
                 {/* BAGIAN 1: PILIH KEBIASAAN */}
                 <div className="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 shadow-sm mb-8">
-                    <h4 className="font-bold text-slate-700 mb-4">Kebiasaan kecil yang saya pilih:</h4>
+                    <div className="flex justify-between items-center mb-4">
+                        <h4 className="font-bold text-slate-700">Kebiasaan kecil yang saya pilih:</h4>
+                        {/* Menampilkan status gembok kecil jika sudah mulai */}
+                        {!!days[0].dateCompleted && (
+                            <span className="text-xs font-bold text-orange-600 bg-orange-100 px-3 py-1 rounded-full flex items-center gap-1">
+                                🔒 Terkunci
+                            </span>
+                        )}
+                    </div>
                     <div className="space-y-3">
-                        {habitOptions.map((option, idx) => (
-                            <label key={idx} className={`flex items-start gap-3 p-4 rounded-xl border cursor-pointer transition-all ${selectedHabit === option ? 'bg-orange-50 border-orange-300' : 'bg-slate-50 border-slate-100 hover:border-orange-200'}`}>
-                                <input type="radio" name="habit" value={option} checked={selectedHabit === option} onChange={(e) => setSelectedHabit(e.target.value)} className="w-5 h-5 mt-0.5 text-orange-500 focus:ring-orange-500 border-slate-300" />
-                                <span className={`text-sm md:text-base font-medium ${selectedHabit === option ? 'text-orange-900' : 'text-slate-600'}`}>{option}</span>
-                            </label>
-                        ))}
+                        {habitOptions.map((option, idx) => {
+                            // Cek apakah hari 1 sudah diisi
+                            const hasStarted = !!days[0].dateCompleted;
+                            return (
+                                <label key={idx} className={`flex items-start gap-3 p-4 rounded-xl border transition-all ${selectedHabit === option
+                                    ? 'bg-orange-50 border-orange-300'
+                                    : 'bg-slate-50 border-slate-100'
+                                    } ${hasStarted
+                                        ? 'cursor-not-allowed opacity-80' // Gaya kusam jika terkunci
+                                        : 'cursor-pointer hover:border-orange-200'
+                                    }`}>
+                                    <input
+                                        type="radio"
+                                        name="habit"
+                                        value={option}
+                                        checked={selectedHabit === option}
+                                        onChange={(e) => setSelectedHabit(e.target.value)}
+                                        disabled={hasStarted} // Kunci opsi ini jika hari 1 sudah diisi
+                                        className="w-5 h-5 mt-0.5 text-orange-500 focus:ring-orange-500 border-slate-300 disabled:opacity-50"
+                                    />
+                                    <span className={`text-sm md:text-base font-medium ${selectedHabit === option ? 'text-orange-900' : 'text-slate-600'}`}>
+                                        {option}
+                                    </span>
+                                </label>
+                            );
+                        })}
                         {selectedHabit === 'Lainnya' && (
                             <div className="pl-8 pt-2">
-                                <input type="text" value={customHabit} onChange={(e) => setCustomHabit(e.target.value)} placeholder="Tuliskan kebiasaan kecilmu di sini..." className="w-full p-3 bg-white border border-orange-200 rounded-xl outline-none focus:ring-2 focus:ring-orange-500 transition-all text-sm" />
+                                <input
+                                    type="text"
+                                    value={customHabit}
+                                    onChange={(e) => setCustomHabit(e.target.value)}
+                                    disabled={!!days[0].dateCompleted} // Kunci input text jika hari 1 sudah diisi
+                                    placeholder="Tuliskan kebiasaan kecilmu di sini..."
+                                    className="w-full p-3 bg-white border border-orange-200 rounded-xl outline-none focus:ring-2 focus:ring-orange-500 transition-all text-sm disabled:bg-slate-100 disabled:text-slate-500 disabled:cursor-not-allowed"
+                                />
                             </div>
                         )}
                     </div>
@@ -186,13 +238,12 @@ export default function Tantangan() {
                             if (selectedHabit && !isCompleted) isReady = true;
                             if (!selectedHabit) lockedText = "🔒 Pilih kebiasaan dulu";
                         } else {
-                            const prevDay = days[index - 1];
+                        const prevDay = days[index - 1];
                             if (!prevDay.dateCompleted) {
                                 lockedText = `🔒 Selesaikan Hari ${index} dulu`;
-                            } // else if (prevDay.dateCompleted === today) {
-                            // lockedText = "🔒 Terbuka besok";
-                            // } else 
-                            {
+                            } else if (prevDay.dateCompleted === today) {
+                                lockedText = "🔒 Terbuka besok";
+                            } else {
                                 if (!isCompleted) isReady = true;
                             }
                         }
@@ -225,7 +276,7 @@ export default function Tantangan() {
                 {allCompleted ? (
                     <div className="bg-white p-6 md:p-8 rounded-3xl border border-orange-200 shadow-lg shadow-orange-100/50 animate-in slide-in-from-bottom-4 mb-10">
                         <h4 className="text-xl font-bold text-orange-700 mb-6 flex items-center gap-2">
-                            <span>D. EVALUASI DIRI</span>
+                            <span>EVALUASI DIRI</span>
                             <span className="text-2xl">🎉</span>
                         </h4>
                         <div className="space-y-6">

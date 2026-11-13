@@ -125,13 +125,54 @@ export default function ModalCetak({ selectedItem, modalType, closeModal }: Moda
                         <div className="text-center mb-10"><h2 className="text-2xl font-bold uppercase tracking-widest border-b-2 border-black pb-2 inline-block">C & D. TANTANGAN & EVALUASI DIRI</h2></div>
 
                         <div className="grid grid-cols-2 gap-4 mb-8 bg-slate-50 print:bg-transparent p-4 rounded-lg border border-slate-200 print:border-black">
-                            <p><strong>Nama:</strong> {selectedItem.nama}</p><p><strong>Kelas:</strong> {selectedItem.kelas}</p><p className="col-span-2"><strong>Selesai pada:</strong> {selectedItem.tanggalSelesai}</p>
+                            <p><strong>Nama:</strong> {selectedItem.nama}</p>
+                            <p><strong>Kelas:</strong> {selectedItem.kelas}</p>
+                            <p className="col-span-2"><strong>Selesai pada:</strong> {selectedItem.tanggalSelesai}</p>
                         </div>
 
                         <div className="space-y-6 text-sm md:text-base">
-                            <div className="break-inside-avoid print:mt-4"><p className="font-bold mb-2">Kebiasaan kecil yang dipilih (Tantangan 3 Hari):</p><div className="p-4 bg-orange-50 border border-orange-200 rounded-lg print:border-black print:bg-transparent font-bold">{selectedItem.kebiasaan}</div></div>
-                            <div className="break-inside-avoid pt-4 print:mt-8"><p className="font-bold mb-2 text-lg">D. EVALUASI DIRI</p><p className="mb-2">Setelah mencoba kebiasaan tersebut, apa perubahan atau hal yang kamu pelajari?</p><div className="p-4 bg-slate-50 border border-slate-200 rounded-lg print:border-black print:bg-transparent">{selectedItem.evaluasi}</div></div>
-                            <div className="mt-8 text-center pt-8 border-t border-slate-200 print:border-black break-inside-avoid print:mt-12"><p className="font-bold text-slate-500 print:text-black mb-2">Pesan untuk diri sendiri:</p><h3 className="text-2xl font-serif italic text-orange-600 print:text-black">"{selectedItem.pesan}"</h3></div>
+                            {/* BAGIAN KEBIASAAN */}
+                            <div className="break-inside-avoid print:mt-4">
+                                <p className="font-bold mb-2">Kebiasaan kecil yang dipilih (Tantangan 3 Hari):</p>
+                                <div className="p-4 bg-orange-50 border border-orange-200 rounded-lg print:border-black print:bg-transparent font-bold">
+                                    {selectedItem.kebiasaan}
+                                </div>
+                            </div>
+
+                            {/* --- BAGIAN C (BARU DITAMBAHKAN DI SINI) --- */}
+                            <div className="break-inside-avoid print:mt-6 mb-6">
+                                <h4 className="font-bold text-slate-800 mb-3 text-lg">C. CATATAN TANTANGAN 3 HARI</h4>
+                                <div className="space-y-3">
+                                    <div className="p-3 bg-slate-50 border border-slate-100 rounded-lg print:border-black print:bg-transparent">
+                                        <span className="font-bold text-orange-600 print:text-black mr-2">H1:</span>
+                                        <span className="text-slate-700 print:text-black">{selectedItem?.catatanH1 || "Tidak ada catatan"}</span>
+                                    </div>
+                                    <div className="p-3 bg-slate-50 border border-slate-100 rounded-lg print:border-black print:bg-transparent">
+                                        <span className="font-bold text-orange-600 print:text-black mr-2">H2:</span>
+                                        <span className="text-slate-700 print:text-black">{selectedItem?.catatanH2 || "Tidak ada catatan"}</span>
+                                    </div>
+                                    <div className="p-3 bg-slate-50 border border-slate-100 rounded-lg print:border-black print:bg-transparent">
+                                        <span className="font-bold text-orange-600 print:text-black mr-2">H3:</span>
+                                        <span className="text-slate-700 print:text-black">{selectedItem?.catatanH3 || "Tidak ada catatan"}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* ------------------------------------------- */}
+
+                            {/* BAGIAN D */}
+                            <div className="break-inside-avoid pt-4 print:mt-8">
+                                <p className="font-bold mb-2 text-lg">D. EVALUASI DIRI</p>
+                                <p className="mb-2">Setelah mencoba kebiasaan tersebut, apa perubahan atau hal yang kamu pelajari?</p>
+                                <div className="p-4 bg-slate-50 border border-slate-200 rounded-lg print:border-black print:bg-transparent">
+                                    {selectedItem.evaluasi}
+                                </div>
+                            </div>
+
+                            {/* BAGIAN PESAN UNTUK DIRI SENDIRI */}
+                            <div className="mt-8 text-center pt-8 border-t border-slate-200 print:border-black break-inside-avoid print:mt-12">
+                                <p className="font-bold text-slate-500 print:text-black mb-2">Pesan untuk diri sendiri:</p>
+                                <h3 className="text-2xl font-serif italic text-orange-600 print:text-black">"{selectedItem.pesan}"</h3>
+                            </div>
                         </div>
                     </div>
                 )}

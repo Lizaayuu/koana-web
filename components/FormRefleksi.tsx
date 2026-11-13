@@ -61,9 +61,9 @@ export default function FormRefleksi() {
     return (
         <div className="animate-in fade-in duration-500 relative">
 
-            {/* Pop-up Notifikasi Sukses */}
+            {/* Pop-up Sukses Refleksi (Toast Melayang) */}
             {isSuccess && (
-                <div className="absolute -top-4 left-0 right-0 bg-green-100 text-green-700 p-4 rounded-xl text-center font-bold shadow-sm z-10 animate-in slide-in-from-top-2">
+                <div className="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] md:w-auto bg-green-100 text-green-800 px-6 py-4 rounded-2xl text-center font-bold shadow-xl z-[100] animate-in slide-in-from-top-5 fade-in duration-300 border border-green-200">
                     Yeay! Refleksimu sudah berhasil disimpan di Ruang Konselor. ✨
                 </div>
             )}
@@ -142,8 +142,8 @@ export default function FormRefleksi() {
                     type="submit"
                     disabled={isSubmitting}
                     className={`w-full font-bold py-4 rounded-xl mt-6 shadow-lg transition-all ${isSubmitting
-                            ? 'bg-slate-300 text-slate-500 cursor-not-allowed'
-                            : 'bg-pink-500 hover:bg-pink-600 text-white shadow-pink-200 hover:-translate-y-1'
+                        ? 'bg-slate-300 text-slate-500 cursor-not-allowed'
+                        : 'bg-pink-500 hover:bg-pink-600 text-white shadow-pink-200 hover:-translate-y-1'
                         }`}
                 >
                     {isSubmitting ? 'Mengirim Data...' : 'Simpan Refleksi Diri'}

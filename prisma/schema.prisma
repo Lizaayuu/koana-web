@@ -54,6 +54,11 @@ model Tantangan {
   kelas          String
   tanggalSelesai String
   kebiasaan      String   @db.Text
+  
+  catatanH1      String?  @db.Text
+  catatanH2      String?  @db.Text
+  catatanH3      String?  @db.Text
+  
   evaluasi       String   @db.Text
   pesan          String   @db.Text
   createdAt      DateTime @default(now())

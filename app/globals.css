@@ -40,3 +40,13 @@ body {
     print-color-adjust: exact;
   }
 }
+
+/* Sembunyikan scrollbar untuk menu di HP */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

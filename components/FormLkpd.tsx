@@ -61,9 +61,9 @@ export default function FormLkpd() {
     return (
         <div className="animate-in fade-in duration-500 relative">
 
-            {/* Pop-up Sukses */}
+            {/* Pop-up Sukses (Toast Melayang) */}
             {isSuccess && (
-                <div className="absolute -top-4 left-0 right-0 bg-teal-100 text-teal-800 p-4 rounded-xl text-center font-bold shadow-sm z-10 animate-in slide-in-from-top-2">
+                <div className="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] md:w-auto bg-teal-100 text-teal-800 px-6 py-4 rounded-2xl text-center font-bold shadow-xl z-[100] animate-in slide-in-from-top-5 fade-in duration-300 border border-teal-200">
                     Keren! Rencana aksimu sudah berhasil disimpan. 🎯
                 </div>
             )}
@@ -169,8 +169,8 @@ export default function FormLkpd() {
                     type="submit"
                     disabled={isSubmitting}
                     className={`w-full font-bold py-4 rounded-xl mt-4 shadow-lg transition-all ${isSubmitting
-                            ? 'bg-slate-300 text-slate-500 cursor-not-allowed'
-                            : 'bg-teal-500 hover:bg-teal-600 text-white shadow-teal-200 hover:-translate-y-1'
+                        ? 'bg-slate-300 text-slate-500 cursor-not-allowed'
+                        : 'bg-teal-500 hover:bg-teal-600 text-white shadow-teal-200 hover:-translate-y-1'
                         }`}
                 >
                     {isSubmitting ? 'Menyimpan...' : 'Simpan Rencana Aksi'}

@@ -17,7 +17,12 @@ export default function KoanaPortal() {
       {/* NAVIGATION BAR */}
       <nav className="bg-white shadow-sm border-b border-slate-100 px-6 py-4 flex justify-between items-center sticky top-0 z-50">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => setActivePage('beranda')}>
-          <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center text-white font-bold">K</div>
+          {/* KODE BARU */}
+          <img 
+              src="/logo-unikama.png" 
+              alt="Logo UNIKAMA" 
+              className="w-8 h-8 object-contain" 
+          />
           <span className="text-xl font-bold text-slate-800 tracking-wide">KOANA</span>
         </div>
         <div className="flex gap-6 md:gap-8 font-medium text-slate-500">
@@ -99,25 +104,25 @@ export default function KoanaPortal() {
               onClick={() => setActiveTab('materi')}
               className={`flex-1 py-3 px-3 rounded-xl font-semibold transition-all ${activeTab === 'materi' ? 'bg-purple-600 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
             >
-              📖 Materi Edukasi
+              Materi Edukasi
             </button>
             <button
               onClick={() => setActiveTab('refleksi')}
               className={`flex-1 py-3 px-3 rounded-xl font-semibold transition-all ${activeTab === 'refleksi' ? 'bg-pink-500 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
             >
-              📝 Lembar Refleksi
+              Lembar Refleksi
             </button>
             <button
               onClick={() => setActiveTab('lkpd')}
               className={`flex-1 py-3 px-3 rounded-xl font-semibold transition-all ${activeTab === 'lkpd' ? 'bg-teal-500 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
             >
-              🎯 Rencana Aksi
+              Rencana Aksi
             </button>
             <button
               onClick={() => setActiveTab('tantangan')}
               className={`flex-1 py-3 px-3 rounded-xl font-semibold transition-all ${activeTab === 'tantangan' ? 'bg-orange-500 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
             >
-              🔥 Tantangan 3 Hari
+              Tantangan 3 Hari 🔥
             </button>
           </div>
 
@@ -155,7 +160,7 @@ export default function KoanaPortal() {
             {/* Area Konten Profil */}
             <div className="pt-20 px-8 flex flex-col items-center">
               <h3 className="text-3xl font-bold text-slate-800 mb-1">Ajeng Nabila</h3>
-              <p className="text-pink-500 font-bold mb-6 text-sm tracking-widest uppercase">Konselor Pendidikan</p>
+              <p className="text-pink-500 font-bold mb-6 text-sm tracking-widest uppercase">Mahasiswa Bimbingan & Konseling</p>
 
               <p className="text-slate-600 mb-8 max-w-md mx-auto leading-relaxed italic">
                 "Tidak perlu ragu untuk menyapa. Rahasiamu aman, dan kita akan cari jalan keluarnya perlahan-lahan."
@@ -176,7 +181,6 @@ export default function KoanaPortal() {
               <div className="mt-10 pt-6 border-t border-slate-100 w-full text-center">
                 <p className="text-sm font-medium text-slate-500 flex items-center justify-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-green-500"></span>
-                  Jam Layanan: Senin - Jumat (08.00 - 15.00 WIB)
                 </p>
               </div>
             </div>
@@ -185,7 +189,7 @@ export default function KoanaPortal() {
       )}
       <div className="text-center mt-20 pb-8">
         <a href="/login" className="text-xs font-semibold text-slate-300 hover:text-slate-500 transition-colors">
-          Area Konselor (Admin)
+          Area Admin
         </a>
       </div>
     </div>

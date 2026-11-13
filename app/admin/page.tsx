@@ -99,10 +99,10 @@ export default function AdminDashboard() {
     }
 
     const aktivitasTerbaru = [
-        ...dbRefleksi.map(d => ({ id: Number(d.id) + 10000, tipe: "Refleksi", nama: String(d.nama || "-"), waktu: String(d.tanggal || "-"), icon: "📝" })),
-        ...dbLkpd.map(d => ({ id: Number(d.id) + 20000, tipe: "LKPD", nama: String(d.nama || "-"), waktu: String(d.tanggal || "-"), icon: "🎯" })),
-        ...dbTantangan.map(d => ({ id: Number(d.id) + 30000, tipe: "Tantangan", nama: String(d.nama || "-"), waktu: String(d.tanggalSelesai || "-"), icon: "🔥" }))
-    ].slice(0, 5);
+        ...dbRefleksi.map(d => ({ id: Number(d.id) + 10000, tipe: "Refleksi", nama: String(d.nama || "-"), waktu: new Date(d.createdAt).toLocaleDateString('id-ID', {day: 'numeric', month: 'short', year: 'numeric'}), icon: "📝", timestamp: new Date(d.createdAt).getTime() })),
+        ...dbLkpd.map(d => ({ id: Number(d.id) + 20000, tipe: "LKPD", nama: String(d.nama || "-"), waktu: new Date(d.createdAt).toLocaleDateString('id-ID', {day: 'numeric', month: 'short', year: 'numeric'}), icon: "🎯", timestamp: new Date(d.createdAt).getTime() })),
+        ...dbTantangan.map(d => ({ id: Number(d.id) + 30000, tipe: "Tantangan", nama: String(d.nama || "-"), waktu: new Date(d.createdAt).toLocaleDateString('id-ID', {day: 'numeric', month: 'short', year: 'numeric'}), icon: "🔥", timestamp: new Date(d.createdAt).getTime() }))
+    ].sort((a, b) => b.timestamp - a.timestamp).slice(0, 5); // Diurutkan dari yang paling baru
 
     return (
         <>
@@ -136,8 +136,7 @@ export default function AdminDashboard() {
                             </div>
                         ) : (
                             <>
-                                {activeMenu === 'dashboard' && <TabRingkasan onSelectMenu={setActiveMenu} aktivitas={aktivitasTerbaru as any} />}
-
+                                {activeMenu === 'dashboard' && <TabRingkasan onSelectMenu={setActiveMenu} aktivitas={aktivitasTerbaru as any} dataRefleksi={dbRefleksi} dataLkpd={dbLkpd} dataTantangan={dbTantangan} />}
                                 {activeMenu !== 'dashboard' && (
                                     <div className="animate-in fade-in duration-500">
                                         <div className="mb-6 relative max-w-md">
