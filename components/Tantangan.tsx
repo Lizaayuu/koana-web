@@ -174,6 +174,8 @@ export default function Tantangan() {
                     </div>
                 </div>
 
+                {/* BAGIAN 1: PILIH KEBIASAAN */}
+                <div className="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 shadow-sm mb-8">
                     <div className="flex justify-between items-start md:items-center gap-3 mb-4">
                         <h4 className="font-bold text-slate-700 text-sm md:text-base">Kebiasaan kecil yang saya pilih:</h4>
                         {/* Menampilkan status gembok kecil jika sudah mulai */}
