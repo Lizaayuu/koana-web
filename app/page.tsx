@@ -98,29 +98,28 @@ export default function KoanaPortal() {
             <h2 className="text-3xl font-bold text-slate-800 mb-3">Rube (Ruang Belajar)</h2>
             <p className="text-slate-500">Pilih menu di bawah ini untuk memulai prosesmu.</p>
           </div>
-
-          <div className="flex flex-col md:flex-row bg-white p-2 rounded-2xl shadow-sm border border-slate-200 gap-2 mb-8">
+              <div className="flex flex-row overflow-x-auto snap-x snap-mandatory gap-2 md:gap-4 md:justify-between bg-white p-2 rounded-2xl shadow-sm border border-slate-200 mb-8 whitespace-nowrap hide-scrollbar">
             <button
               onClick={() => setActiveTab('materi')}
-              className={`flex-1 py-3 px-3 rounded-xl font-semibold transition-all ${activeTab === 'materi' ? 'bg-purple-600 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
+              className={`flex-shrink-0 snap-center md:flex-1 py-3 px-5 rounded-xl font-semibold transition-all ${activeTab === 'materi' ? 'bg-purple-600 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
             >
               Materi Edukasi
             </button>
             <button
               onClick={() => setActiveTab('refleksi')}
-              className={`flex-1 py-3 px-3 rounded-xl font-semibold transition-all ${activeTab === 'refleksi' ? 'bg-pink-500 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
+              className={`flex-shrink-0 snap-center md:flex-1 py-3 px-5 rounded-xl font-semibold transition-all ${activeTab === 'refleksi' ? 'bg-pink-500 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
             >
               Lembar Refleksi
             </button>
             <button
               onClick={() => setActiveTab('lkpd')}
-              className={`flex-1 py-3 px-3 rounded-xl font-semibold transition-all ${activeTab === 'lkpd' ? 'bg-teal-500 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
+              className={`flex-shrink-0 snap-center md:flex-1 py-3 px-5 rounded-xl font-semibold transition-all ${activeTab === 'lkpd' ? 'bg-teal-500 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
             >
               Rencana Aksi
             </button>
             <button
               onClick={() => setActiveTab('tantangan')}
-              className={`flex-1 py-3 px-3 rounded-xl font-semibold transition-all ${activeTab === 'tantangan' ? 'bg-orange-500 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
+              className={`flex-shrink-0 snap-center md:flex-1 py-3 px-5 rounded-xl font-semibold transition-all ${activeTab === 'tantangan' ? 'bg-orange-500 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
             >
               Tantangan 3 Hari 🔥
             </button>
