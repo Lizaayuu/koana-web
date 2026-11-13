@@ -14,18 +14,19 @@ export default function KoanaPortal() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 font-sans selection:bg-pink-200 pb-20">
 
-      {/* NAVIGATION BAR */}
-      <nav className="bg-white shadow-sm border-b border-slate-100 px-6 py-4 flex justify-between items-center sticky top-0 z-50">
+{/* NAVIGATION BAR */}
+      <nav className="bg-white shadow-sm border-b border-slate-100 px-4 md:px-6 py-3 md:py-4 flex justify-between items-center sticky top-0 z-50">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => setActivePage('beranda')}>
-          {/* KODE BARU */}
           <img 
               src="/logo-unikama.png" 
               alt="Logo UNIKAMA" 
-              className="w-8 h-8 object-contain" 
+              className="w-7 h-7 md:w-8 md:h-8 object-contain" 
           />
-          <span className="text-xl font-bold text-slate-800 tracking-wide">KOANA</span>
+          <span className="text-lg md:text-xl font-bold text-slate-800 tracking-wide">KOANA</span>
         </div>
-        <div className="flex gap-6 md:gap-8 font-medium text-slate-500">
+        
+        {/* Jarak antar menu diperkecil di HP (gap-3), teks juga dikecilkan (text-sm) */}
+        <div className="flex gap-3 md:gap-8 font-medium text-slate-500 text-sm md:text-base">
           <button
             onClick={() => setActivePage('beranda')}
             className={`hover:text-purple-600 transition-colors ${activePage === 'beranda' && 'text-purple-600 font-bold'}`}
@@ -93,7 +94,7 @@ export default function KoanaPortal() {
 
       {/* ---------------- TAMPILAN 2: RUANG BELAJAR (RUBE) ---------------- */}
       {activePage === 'rube' && (
-        <main className="max-w-5xl mx-auto px-6 pt-10 animate-in fade-in duration-500">
+        <main className="max-w-5xl mx-auto px-4 md:px-6 pt-6 md:pt-10 animate-in fade-in duration-500">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-bold text-slate-800 mb-3">Rube (Ruang Belajar)</h2>
             <p className="text-slate-500">Pilih menu di bawah ini untuk memulai prosesmu.</p>
@@ -125,7 +126,7 @@ export default function KoanaPortal() {
             </button>
           </div>
 
-          <div className="bg-white rounded-3xl shadow-sm border border-slate-200 p-6 md:p-10 transition-all duration-300">
+          <div className="bg-white rounded-2xl md:rounded-3xl shadow-sm border border-slate-200 p-4 sm:p-6 md:p-10 transition-all duration-300">
             {/* Memanggil Komponen yang sudah kita pisahkan */}
             {activeTab === 'materi' && <Materi />}
             {activeTab === 'refleksi' && <FormRefleksi />}
