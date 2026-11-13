@@ -174,13 +174,11 @@ export default function Tantangan() {
                     </div>
                 </div>
 
-                {/* BAGIAN 1: PILIH KEBIASAAN */}
-                <div className="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 shadow-sm mb-8">
-                    <div className="flex justify-between items-center mb-4">
-                        <h4 className="font-bold text-slate-700">Kebiasaan kecil yang saya pilih:</h4>
+                    <div className="flex justify-between items-start md:items-center gap-3 mb-4">
+                        <h4 className="font-bold text-slate-700 text-sm md:text-base">Kebiasaan kecil yang saya pilih:</h4>
                         {/* Menampilkan status gembok kecil jika sudah mulai */}
                         {!!days[0].dateCompleted && (
-                            <span className="text-xs font-bold text-orange-600 bg-orange-100 px-3 py-1 rounded-full flex items-center gap-1">
+                            <span className="text-xs font-bold text-orange-600 bg-orange-100 px-3 py-1 rounded-full flex items-center gap-1 flex-shrink-0 whitespace-nowrap">
                                 🔒 Terkunci
                             </span>
                         )}
